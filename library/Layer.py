@@ -1,8 +1,8 @@
 import numpy as np
 
-from library.Activation import Activation
+from library.Activation import Activation, SigmoidActivation
 from library.Exceptions import DummyClassException, ShapeMismatchException
-from library.Neuron import Neuron
+from library.Neuron import Neuron, WeightedSumNeuron
 
 
 class Layer:
@@ -14,7 +14,7 @@ class Layer:
 
 
 class D1FullLayer(Layer):
-    def __init__(self, neurons: int, inputs_per_neuron: int, neuron_type: type[Neuron], activation_type: type[Activation], **kwargs) -> None:
+    def __init__(self, neurons: int, inputs_per_neuron: int, neuron_type: type[Neuron] = WeightedSumNeuron, activation_type: type[Activation] = SigmoidActivation, **kwargs) -> None:
         self.inputs_per_neuron = inputs_per_neuron
         self.neurons = neurons
         self.activation_type = activation_type
@@ -23,7 +23,7 @@ class D1FullLayer(Layer):
         self.shape = (self.inputs_per_neuron, self.neurons)
 
         self.neurons = [
-            neuron_type(activation_type, inputs_per_neuron, **kwargs)
+            neuron_type(inputs_per_neuron, activation_type, **kwargs)
             for _ in range(neurons)
         ]
 

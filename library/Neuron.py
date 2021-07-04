@@ -1,11 +1,11 @@
 import numpy as np
 
-from library.Activation import Activation
+from library.Activation import Activation, SigmoidActivation
 from library.Exceptions import DummyClassException
 
 
 class Neuron:
-    def __init__(self, activation_type: type[Activation], inputs: int, thresh: float = 0, **kwargs) -> None:
+    def __init__(self, inputs: int, activation_type: type[Activation] = SigmoidActivation, thresh: float = 0) -> None:
         raise DummyClassException("Neuron.Neuron")
 
     def calculate(self, x: np.array) -> float:
@@ -13,9 +13,9 @@ class Neuron:
 
 
 class WeightedSumNeuron(Neuron):
-    def __init__(self, activation_type: type[Activation], inputs: int, thresh: float = 0, **kwargs) -> None:
+    def __init__(self, inputs: int, activation_type: type[Activation] = SigmoidActivation, thresh: float = 0) -> None:
         self.activation = activation_type
-        self.activation_instance = activation_type(**kwargs)
+        self.activation_instance = activation_type()
         self.inputs = inputs
         self.thresh = thresh
         self.weights = np.random.rand(self.inputs)
