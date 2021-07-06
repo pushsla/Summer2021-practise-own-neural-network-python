@@ -1,4 +1,4 @@
-from library.Exceptions import DummyClassException
+from library.DeprecatedExceptions import DummyClassException
 from numpy import exp
 
 

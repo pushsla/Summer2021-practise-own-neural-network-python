@@ -1,8 +1,8 @@
 import numpy as np
 
-from library.Activation import Activation, SigmoidActivation
-from library.Exceptions import DummyClassException, ShapeMismatchException
-from library.Neuron import Neuron, WeightedSumNeuron
+from library.DeprecatedActivation import Activation, SigmoidActivation
+from library.DeprecatedExceptions import DummyClassException, ShapeMismatchException
+from library.DeprecatedNeuron import Neuron, WeightedSumNeuron
 
 
 class Layer:

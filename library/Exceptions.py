@@ -8,10 +8,14 @@ class LibraryException(Exception):
 
 
 class DummyClassException(LibraryException):
-    def __init__(self, classname: str):
-        super().__init__("The {} class is unusable due to being a base class".format(classname))
+    def __init__(self, classtype: type):
+        super().__init__("The {} class is unusable due to being a base class".format(classtype.__name__))
 
 
 class ShapeMismatchException(LibraryException):
-    def __init__(self, msg: str):
-        super().__init__(msg)
+    def __init__(self, classtype: type, function, need: tuple[int], got: tuple[int]):
+        super().__init__("{} expected {} shape in function {}, got {}".format(classtype.__name__, need, function.__name__, got))
+
+
+class InternalShapeException(ShapeMismatchException):
+    pass
