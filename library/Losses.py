@@ -16,8 +16,10 @@ class Loss:
 class MeanSquaredError(Loss):
     @staticmethod
     def value(real: np.array, predicted: np.array) -> float:
-        return ((real - predicted)**2).mean()
+        errors = np.array([((real[i] - predicted[i])**2).sum() for i, _ in enumerate(real)])
+        return errors.mean()
 
     @staticmethod
     def derive(real: np.array, predicted: np.array) -> float:
-        return (-2*(real - predicted)).mean()
+        errors = np.array([(-2*(real[i] - predicted[i])).sum() for i, _ in enumerate(real)])
+        return errors.mean()

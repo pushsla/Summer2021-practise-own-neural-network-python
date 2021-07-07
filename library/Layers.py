@@ -16,7 +16,6 @@ class Layer:
         self.last_inputs = None
         self.last_activated = None
         self.last_unactivated = None
-        self.last_neurons_unactivated = None
 
     def calculate(self, inputs: np.array) -> np.array:
         raise DummyClassException(Layer)
@@ -28,8 +27,7 @@ class InputLayer(Layer):
 
     def calculate(self, inputs: np.array) -> np.array:
         self.last_inputs = np.ndarray.copy(inputs)
-        self.last_neurons_unactivated = np.ndarray.copy(inputs)
-        self.last_unactivated = np.sum(inputs)
+        self.last_unactivated = np.ndarray.copy(inputs)
         self.last_activated = np.ndarray.copy(inputs)
 
         return self.last_activated
@@ -51,8 +49,7 @@ class D1FullLayer(Layer):
             raise InternalShapeException(D1FullLayer, self.calculate, self.output_shape, output.shape)
 
         self.last_activated = np.array([self.activation.value(x) for x in output])
-        self.last_neurons_unactivated = output
-        self.last_unactivated = np.sum(output)
+        self.last_unactivated = output
 
         return self.last_activated
 
